@@ -17,8 +17,14 @@ fraction::fraction() {
 }
 
 fraction::fraction(int a, int b) {
-	num = a / nod(a, b);
-	den = b / nod(a, b);
+	if (b != 0) {
+		num = a / nod(a, b);
+		den = b / nod(a, b);
+	}
+	else {
+		cout << "Знаменатель равен нулю." << endl;
+		return;
+	}
 }
 
 void fraction::set(int a, int b) {
@@ -47,30 +53,32 @@ void fraction::show() {
 
 fraction operator+ (fraction& f1, fraction& f2) {
 	fraction res;
-	res.set(f1.get_num() * f2.get_den() + f2.get_num() * f1.get_den(), f1.get_den() * f2.get_den());
+	res.set(f1.num * f2.den + f2.num * f1.den, f1.den * f2.den);
 	return res;
 };
 
 fraction operator- (fraction& f1, fraction& f2) {
 	fraction res;
-	res.set(f1.get_num() * f2.get_den() - f2.get_num() * f1.get_den(), f1.get_den() * f2.get_den());
+	res.set(f1.num * f2.den - f2.num * f1.den, f1.den * f2.den);
 	return res;
 };
 
-fraction operator++ (fraction& f1) {
+fraction operator++ (fraction& f1, int) {
+	int tnum = f1.num++;
+	int tden = f1.den;
 	fraction res;
-	res.set(f1.get_num() + 1, f1.get_den());
+	res.set(tnum, tden);
 	return res;
 };
 
 bool operator== (fraction& f1, fraction& f2) {
-	return (f1.get_num() / f1.get_den()) == (f2.get_num() / f2.get_den());
+	return (float(f1.num) / float(f1.den)) == (float(f2.num) / float(f2.den));
 };
 
 bool operator> (fraction& f1, fraction& f2) {
-	return (f1.get_num() / f1.get_den()) > (f2.get_num() / f2.get_den());
+	return (float(f1.num) / float(f1.den)) > (float(f2.num) / float(f2.den));
 };
 
 bool operator< (fraction& f1, fraction& f2) {
-	return (f1.get_num() / f1.get_den()) < (f2.get_num() / f2.get_den());
+	return (float(f1.num) / float(f1.den)) < (float(f2.num) / float(f2.den));
 };
