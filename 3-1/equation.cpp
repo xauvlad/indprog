@@ -4,35 +4,35 @@
 
 using namespace std;
 
-equation::equation() {
+eq2::eq2() {
 	a = 0;
 	b = 0;
 	c = 0;
 	D = 0;
 };
 
-equation::equation(double _a, double _b, double _c) {
+eq2::eq2(double _a, double _b, double _c) {
 	a = _a;
 	b = _b;
 	c = _c;
 	D = b * b - 4 * a * c;
 };
 
-void equation::set(double _a, double _b, double _c) {
+void eq2::set(double _a, double _b, double _c) {
 	a = _a;
 	b = _b;
 	c = _c;
 	D = b * b - 4 * a * c;
 };
 
-void equation::show() {
+void eq2::show() {
 	if (a != 0) cout << a << "x^2 + ";
 	if (b != 0) cout << b << "x + ";
 	if (c != 0) cout << c;
 	cout << endl;
 }
 
-double equation::find_X() {
+double eq2::find_X() {
 	if (D < 0) {
 		cout << "Корней нет." << endl;
 		return NULL;
@@ -50,26 +50,24 @@ double equation::find_X() {
 	}
 };
 
-double equation::find_Y() {
-	double s = find_X();
-	return a * s * s + b * s + c;
-
+double eq2::find_Y(double x1) {
+	return a * x1 * x1 + b * x1 + c;
 };
 
-double equation::get_a() {
+double eq2::get_a() {
 	return a;
 };
 
-double equation::get_b() {
+double eq2::get_b() {
 	return b;
 };
 
-double equation::get_c() {
+double eq2::get_c() {
 	return c;
 };
 
-equation operator + (equation& eq1, equation& eq2) {
-	equation temp;
-	temp.set(eq1.get_a() + eq2.get_a(), eq1.get_b() + eq2.get_b(), eq1.get_c() + eq2.get_c());
+eq2 operator+ (eq2& _eq1, eq2& _eq2) {
+	eq2 temp;
+	temp.set(_eq1.get_a() + _eq2.get_a(), _eq1.get_b() + _eq2.get_b(), _eq1.get_c() + _eq2.get_c());
 	return temp;
 };
