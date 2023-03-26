@@ -64,7 +64,7 @@ frustum::frustum(double _r, double _r2, double _h2) : cone(_r, _h2 * _r / _r2) {
 
 double frustum::area() {
 	double l = sqrt(h2 * h2 + (r - r2) * (r - r2));
-	return pi * (r + r2) * l * +pi * r * r + pi * r2 * r2;
+	return pi * (r + r2) * l + pi * r * r + pi * r2 * r2;
 }
 
 double frustum::volume() {
@@ -73,7 +73,7 @@ double frustum::volume() {
 }
 
 ostream& operator<< (ostream& stream, frustum obj) {
-	stream << "(" << obj.x << "; " << obj.y << "; " << obj.z << "), lower radius = " << obj.r << ", upper radius = " << obj.r2 << ", height = " << obj.h << endl;
+	stream << "(" << obj.x << "; " << obj.y << "; " << obj.z << "), lower radius = " << obj.r << ", upper radius = " << obj.r2 << ", height = " << obj.h2 << endl;
 	return stream;
 }
 
